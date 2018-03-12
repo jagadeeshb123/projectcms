@@ -1,7 +1,8 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jagad
- * Date: 03/06/2018
- * Time: 8:53 AM
- */
+@extends('admin.layouts.master')
+
+
+@section('content')
+
+
+
+@endsection
