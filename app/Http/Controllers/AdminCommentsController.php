@@ -6,9 +6,8 @@ use App\Comment;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
 
-class PostCommentController extends Controller
+class AdminCommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,8 @@ class PostCommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+        return view('admin.comments.index', compact('comments'));
     }
 
     /**
@@ -38,18 +38,7 @@ class PostCommentController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
-
-        $data = [
-            'post_id' => $request->post_id,
-            'author' => $user->name,
-            'email' => $user->email,
-            'body' => $request->body
-        ];
-        Comment::create($data);
-        $request->session()->flash('comment_message', 'Your comment is waiting for approval');
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -71,7 +60,11 @@ class PostCommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        Comment::where(['id'=>$id])->update([
+            'is_active'=> \request('is_active')
+        ]);
+
+        return redirect()->back();
     }
 
     /**
@@ -94,6 +87,8 @@ class PostCommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::findOrFail($id)->delete();
+
+        return redirect()->back();
     }
 }

@@ -59,14 +59,18 @@ Route::group(['middleware'=>'admin'], function () {
     Route::get('/admin/categories/{category}/delete', 'AdminCategoriesController@destroy');
 
 
-    Route::get('/admin/comments', 'PostCommentController@index');
+    Route::get('/admin/comments', 'AdminCommentsController@index');
 
-    Route::get('/admin/comment/replies', 'CommentRepliesController@index');
+    Route::post('/comments/{id}', 'PostCommentController@store');
 
+    Route::post('/admin/comments/{id}', 'AdminCommentsController@edit');
 
+    Route::get('/admin/comments/{id}/delete', 'AdminCommentsController@destroy');
 });
 
-Route::get('/posts', 'HomeController@index');
+Route::get('/posts', 'PostsController@index');
+
+Route::get('/posts/{id}', 'PostsController@show');
 
 
 
