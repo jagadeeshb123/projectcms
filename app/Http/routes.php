@@ -52,14 +52,21 @@ Route::group(['middleware'=>'admin'], function () {
 
     Route::post('/admin/categories', 'AdminCategoriesController@store');
 
-
     Route::get('/admin/categories/{id}', 'AdmincategoriesController@edit');
 
     Route::post('/admin/categories/{category}/update', 'AdmincategoriesController@update');
 
-
     Route::get('/admin/categories/{category}/delete', 'AdminCategoriesController@destroy');
+
+
+    Route::get('/admin/comments', 'PostCommentController@index');
+
+    Route::get('/admin/comment/replies', 'CommentRepliesController@index');
+
+
 });
+
+Route::get('/posts', 'HomeController@index');
 
 
 
