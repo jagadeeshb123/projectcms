@@ -30,7 +30,8 @@
                     <td>{{$user->created_at->diffForHumans()}}</td>
                     <td>{{$user->updated_at->diffForHumans()}}</td>
                     <td><a href="/admin/users/{{$user->id}}/delete">
-                            <button class="btn btn-danger">Delete</button></a></td>
+                            <button class="btn btn-danger">Delete</button></a>
+                    </td>
                 </tr>
             @endforeach
         @endif

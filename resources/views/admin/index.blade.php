@@ -3,6 +3,6 @@
 
 @section('content')
 
-
+    <p>Admin home index</p>
 
 @endsection

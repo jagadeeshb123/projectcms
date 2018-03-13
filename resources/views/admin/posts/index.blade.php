@@ -26,10 +26,13 @@
                     <td>{{$post->user->name}}</td>
                     <td>{{$post->category_id ? $post->category->name:'Uncategorized'}}</td>
                     <td><img src="{{$post->photo?$post->photo->file:'No photo exist'}}" alt="No photo exist" width="120" height="40"></td>
-                    <td>{{$post->title}}</td>
-                    <td>{{$post->body}}</td>
+                    <td><a href="/admin/posts/{{$post->id}}">{{$post->title}}</a></td>
+                    <td>{{str_limit($post->body, 18)}}</td>
                     <td>{{$post->created_at->diffForHumans()}}</td>
                     <td>{{$post->updated_at->diffForHumans()}}</td>
+                    <td><a href="/admin/posts/{{$post->id}}/delete">
+                            <button class="btn btn-danger">Delete</button></a>
+                    </td>
                 </tr>
             @endforeach
         @endif

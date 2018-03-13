@@ -40,6 +40,25 @@ Route::group(['middleware'=>'admin'], function () {
     Route::get('admin/posts/create', 'AdminPostsController@create');
 
     Route::post('admin/posts', 'AdminPostsController@store');
+
+    Route::get('admin/posts/{id}', 'AdminPostsController@edit');
+
+    Route::post('/admin/posts/{post}/update', 'AdminPostsController@update');
+
+    Route::get('/admin/posts/{post}/delete', 'AdminPostsController@destroy');
+
+
+    Route::get('/admin/categories', 'AdminCategoriesController@index');
+
+    Route::post('/admin/categories', 'AdminCategoriesController@store');
+
+
+    Route::get('/admin/categories/{id}', 'AdmincategoriesController@edit');
+
+    Route::post('/admin/categories/{category}/update', 'AdmincategoriesController@update');
+
+
+    Route::get('/admin/categories/{category}/delete', 'AdminCategoriesController@destroy');
 });
 
 

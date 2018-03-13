@@ -26,15 +26,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/admin/categories">
                     <span data-feather="bar-chart-2"></span>
-                    Reports
+                    Categories
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/admin/categories/create">
                     <span data-feather="layers"></span>
-                    Integrations
+                    Create Categories
                 </a>
             </li>
         </ul>

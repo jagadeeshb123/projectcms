@@ -16,12 +16,13 @@
         <div class="form-group">
             <lable>Category:</lable>
             <select name="category_id" class="form-control" id="category_id">
+                <option value="0">Uncategorized</option>
                 @if($categories)
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 @endif
-                    <option value="1">Uncategorized</option>
+
             </select>
         </div>
 

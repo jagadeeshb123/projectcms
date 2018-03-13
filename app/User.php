@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Role;
+use App\Photo;
 
 
 class User extends Authenticatable
@@ -36,7 +38,7 @@ class User extends Authenticatable
 
     public function isAdmin(){
 
-        if($this->role->name == 'Administrator' && $this->is_active == 1){
+        if($this->role->name == "Administrator" && $this->is_active == 1){
             return true;
         }
         return false;

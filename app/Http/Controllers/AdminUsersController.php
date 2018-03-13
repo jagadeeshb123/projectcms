@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Photo;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use PhpParser\Node\Stmt\Return_;
@@ -53,7 +54,7 @@ class AdminUsersController extends Controller
     public function update($user)
     {
         $password = bcrypt(request('password'));
-        User::where(['id'=>$user])->update([
+        Auth::user()->where(['id'=>$user])->update([
             'name'=> \request('name'),
             'email'=> \request('email'),
             'password'=> $password,
@@ -67,7 +68,9 @@ class AdminUsersController extends Controller
 
     public function destroy($user)
     {
-        User::where(['id'=>$user])->delete();
+        $user = User::findOrFail($user);
+        unlink(public_path(). $user->photo->file);
+        $user->delete();
 
         return redirect('/admin/users');
     }
