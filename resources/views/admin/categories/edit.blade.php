@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 
-
 @section('content')
 
     <h1>Categiroes:-</h1>

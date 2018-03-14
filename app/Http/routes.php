@@ -26,18 +26,25 @@ Route::group(['middleware'=>'subscriber'], function () {
 
 });
 
-
 Route::group(['middleware'=>'author'], function () {
 
-    Route::get('/posts/create', 'PostsController@create');
+    Route::get('author/', 'AuthorPostsController@index');
+
+    Route::get('author/posts/create', 'AuthorPostsController@create');
 
     Route::post('/posts', 'PostsController@store');
-});
 
+    Route::get('author/posts', 'AuthorPostsController@index');
+
+});
 
 Route::group(['middleware'=>'admin'], function () {
 
+    Route::get('/admin', 'AdminPostsController@index');
+
     Route::get('admin/posts', 'AdminPostsController@index');
+
+    Route::get('admin/posts/create', 'AdminPostsController@create');
 
     Route::get('admin/posts/{id}', 'AdminPostsController@edit');
 

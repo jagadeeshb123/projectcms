@@ -1,32 +1,27 @@
-@extends('admin.layouts.master')
-
+@extends('author.layouts.master')
 
 @section('content')
 
-    <h2>Update Post:-</h2>
-
-    <form action="/admin/posts/{{$post->id}}/update" method="post" enctype="multipart/form-data">
+    <h2>Create Post:-</h2>
+    <form action="/posts" method="post" enctype="multipart/form-data">
 
         {{@csrf_field()}}
 
         <div class="form-group">
             <lable>Title:</lable>
-            <input type="text" class="form-control" name="title" value="{{$post->title}}">
+            <input type="text" class="form-control" name="title">
         </div>
 
         <div class="form-group">
-            <lable>Body:</lable>
-            <textarea name="body" id="body" cols="30" rows="10" class="form-control">{{$post->body}}</textarea>
-        </div>
-
-        <div class="form-group">
-            <select name="category_id" class="form-control" id="category_id" required>
-                <option value="0">Uncatagarized</option>
+            <lable>Category:</lable>
+            <select name="category_id" class="form-control" id="category_id">
+                <option value="0">Uncategorized</option>
                 @if($categories)
                     @foreach($categories as $category)
                         <option value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 @endif
+
             </select>
         </div>
 
@@ -36,12 +31,19 @@
         </div>
 
         <div class="form-group">
-            <button name="submit" class="btn btn-primary" id="submit">Update</button>
+            <lable>Description:</lable>
+            <textarea name="body" id="body" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button name="submit" class="btn btn-primary" id="submit">Create Post</button>
         </div>
 
         @include('layouts.errors')
 
     </form>
 
-
 @endsection
+
+
+

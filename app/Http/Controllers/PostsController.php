@@ -6,6 +6,8 @@ use App\Category;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\post;
+use App\Photo;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 
@@ -21,6 +23,7 @@ class PostsController extends Controller
             $i = $i +1;
         }
         sort($timearray);
+
         return view('posts.index', compact('post', 'timearray'));
     }
 
@@ -30,13 +33,6 @@ class PostsController extends Controller
         $comments = $post->comments;
 
         return view('posts.view', compact('post', 'comments'));
-    }
-
-    public function create()
-    {
-        $categories = Category::get()->all();
-        return $categories;
-        //return view('posts.create', compact('categories'));
     }
 
     public function store(Request $request)

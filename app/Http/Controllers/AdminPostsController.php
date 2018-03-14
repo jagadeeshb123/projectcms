@@ -20,6 +20,13 @@ class AdminPostsController extends Controller
         return view('admin.posts.index', compact('posts'));
     }
 
+    public function create()
+    {
+        $categories = Category::get()->all();
+
+        return view('admin.posts.create', compact('categories'));
+    }
+
     public function edit($id)
     {
         $post = Post::findOrFail($id);
@@ -46,7 +53,6 @@ class AdminPostsController extends Controller
         ]);
 
         return redirect('/admin/posts');
-
     }
 
     public function destroy($user)
@@ -56,6 +62,5 @@ class AdminPostsController extends Controller
         $post->delete();
 
         return redirect('/admin/posts');
-
     }
 }

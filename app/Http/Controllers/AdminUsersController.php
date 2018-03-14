@@ -39,11 +39,6 @@ class AdminUsersController extends Controller
         Return redirect('/admin/users');
     }
 
-    public function show($id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $user = User::findOrFail($id);
@@ -63,7 +58,6 @@ class AdminUsersController extends Controller
         ]);
 
         return redirect('/admin/users');
-
     }
 
     public function destroy($user)

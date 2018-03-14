@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 
-
 @section('content')
 
     <h2>Create User:-</h2>
@@ -48,7 +47,6 @@
         </div>
 
         @include('layouts.errors')
-
 
     </form>
 

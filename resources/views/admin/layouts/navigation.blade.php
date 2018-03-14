@@ -26,7 +26,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/posts/create">
+                <a class="nav-link" href="/admin/posts/create">
                     <span data-feather="users"></span>
                     Create Post
                 </a>

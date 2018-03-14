@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 
-
 @section('content')
 
     <h1>Categiroes:-</h1>
@@ -22,7 +21,6 @@
                     </div>
 
                     @include('layouts.errors')
-
                 </form>
         </div>
 

@@ -1,20 +1,20 @@
 @extends('admin.layouts.master')
 
-
 @section('content')
+
     <h1>Users:-</h1>
     <table class="table table-hover">
         <thead>
-        <tr>
-            <th>Id</th>
-            <th>Photo</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Statuss</th>
-            <th>Created at</th>
-            <th>Updated at</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Statuss</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+            </tr>
         </thead>
         <tbody>
 
@@ -37,4 +37,5 @@
         @endif
         </tbody>
     </table>
+
 @endsection
