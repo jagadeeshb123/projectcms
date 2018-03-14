@@ -1,47 +1,80 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
-use App\Photo;
-use App\User;
+use App\Models\CMS\Photo;
+use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Requests;
-use PhpParser\Node\Stmt\Return_;
-
+/**
+ * Class AdminUsersController
+ * admin can add remove update user information
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ *
+ * @package App\Http\Controllers
+ */
 class AdminUsersController extends Controller
 {
-    public function index(){
+    /**
+     * View all users
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
 
         $users = User::all();
 
         return view('admin.users.index', compact('users'));
     }
 
+    /**
+     * Create new user
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('admin.users.create');
     }
 
-    public function store(Request $request){
-
+    /**
+     * Store user in database
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function store(Request $request)
+    {
+        $input = $request->all();
         $this->validate(request(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'role_id' => 'required',
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'role_id'   => 'required',
             'is_active' => 'required',
-            'password' => 'required'
+            'password'  => 'required',
+            'photo_id'  => 'required'
         ]);
-
-        $photo = Photo::addPhotoToPublic($request);
-        $password = bcrypt($request->password);
-        $data = User::updateValidation($request, $photo, $password);
-        User::create($data);
+        if($request->file(['photo_id']))
+        {
+            $photo = Photo::addPhotoToPublic($request);
+            $input['photo_id'] = $photo->id;
+        }
+        $input['password'] = bcrypt($request->get('password'));
+        $user = User::create($input);
+        if(!isset($user->id))
+        {
+            return redirect()->back()->withInput()->withErrors('Could not save successfully');
+        }
 
         Return redirect('/admin/users');
     }
 
+    /**
+     * Edit user information
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $user = User::findOrFail($id);
@@ -49,21 +82,46 @@ class AdminUsersController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
+    /**
+     * Update user info to database
+     *
+     * @param Request $request
+     * @param $user
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(request $request, $user)
     {
-        $photo = $password = null;
-        if($request->photo_id)
+        $data = [];
+        $feildsToValues = [
+            'name',
+            'email',
+            'role_id',
+            'is_active',
+            'password'
+        ];
+        foreach ($feildsToValues as $feild)
+        {
+            if($request->get($feild))
+            {
+                $data[$feild] = $request->get($feild);
+            }
+        }
+        if($request->file(['photo_id']))
+        {
             $photo = Photo::addPhotoToPublic($request);
-        if($request->password)
-            $password = bcrypt($request->password);
-        //checking for updated fields and passing to assoc array
-        $data = User::updateValidation($request, $photo, $password);
-
+            $data['photo_id'] = $photo->id;
+        }
         Auth::user()->where(['id'=>$user])->update($data);
 
         return redirect('/admin/users');
-    }
 
+    }
+    /**
+     * Delete user from database
+     *
+     * @param $user
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy($user)
     {
         $user = User::findOrFail($user);

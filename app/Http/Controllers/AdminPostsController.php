@@ -1,18 +1,24 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
-use App\Category;
-use Illuminate\Support\Facades\Auth;
-use App\Photo;
-use App\User;
-use App\post;
+use App\Models\CMS\Category;
+use App\Models\CMS\Photo;
+use App\Models\CMS\post;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-
+/**
+ * Class AdminPostsController
+ * admin can edit update delete posts
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ *
+ * @package App\Http\Controllers
+ */
 class AdminPostsController extends Controller
 {
+    /**
+     * View all posts in admin view index
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $posts = Post::all();
@@ -20,6 +26,11 @@ class AdminPostsController extends Controller
         return view('admin.posts.index', compact('posts'));
     }
 
+    /**
+     * Create new post
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $categories = Category::get()->all();
@@ -27,6 +38,12 @@ class AdminPostsController extends Controller
         return view('admin.posts.create', compact('categories'));
     }
 
+    /**
+     * Edit post
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit($id)
     {
         $post = Post::findOrFail($id);
@@ -35,6 +52,13 @@ class AdminPostsController extends Controller
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 
+    /**
+     * Update post to database
+     *
+     * @param Request $request
+     * @param $post
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Request $request, $post)
     {
         $photo = null;
@@ -47,6 +71,12 @@ class AdminPostsController extends Controller
         return redirect('/admin/posts');
     }
 
+    /**
+     * Delete post from database
+     *
+     * @param $user
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy($user)
     {
         $post = Post::findOrFail($user);

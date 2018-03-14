@@ -1,15 +1,23 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
-use App\post;
-use Illuminate\Http\Request;
-use App\Category;
-use App\Http\Requests;
+use App\Models\CMS\post;
+use App\Models\CMS\Category;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class AuthorPostsController
+ * author can create new post and view his posts
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ *
+ * @package App\Http\Controllers
+ */
 class AuthorPostsController extends Controller
 {
+    /**
+     * View all author posts
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $user = Auth::user()->id;
@@ -18,6 +26,11 @@ class AuthorPostsController extends Controller
         return view('author.posts.index', compact('posts'));
     }
 
+    /**
+     * Create new post
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $categories = Category::get()->all();

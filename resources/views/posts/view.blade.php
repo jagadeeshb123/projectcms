@@ -21,7 +21,7 @@
 
                         <input type="hidden" id="post_id" name="post_id" value="{{$post->id}}">
                         <div class="form-group">
-                            <textarea name="body" id="" cols="2" rows="2" class="form-control"></textarea>
+                            <textarea name="body" id="" cols="2" rows="2" class="form-control" required></textarea>
                         </div>
                         <div class="form-group text-info">
                             @if(Session::has('comment_message'))
@@ -38,15 +38,17 @@
                 <hr>
                 <div class="container">
                     @foreach($comments as $comment)
-                        <div class="media">
-                            <div class="media-body">
-                                <h4 class="media-heading">{{$comment->author}}
-                                    <small>{{$comment->created_at->diffForHumans()}}</small>
-                                </h4>
-                                {{$comment->body}}
+                        @if($comment->is_active == 1)
+                            <div class="media">
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{$comment->author}}
+                                        <small>{{$comment->created_at->diffForHumans()}}</small>
+                                    </h4>
+                                    {{$comment->body}}
+                                </div>
                             </div>
-                        </div>
-                        <hr>
+                            <hr>
+                        @endif
                     @endforeach
                 </div>
             @endif

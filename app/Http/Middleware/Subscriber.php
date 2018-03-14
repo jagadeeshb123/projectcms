@@ -1,14 +1,19 @@
-<?php
-
-namespace App\Http\Middleware;
+<?php namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class Subscriber
+ * Checks if logged in user is subscriber
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ *
+ * @package App\Http\Middleware
+ */
 class Subscriber
 {
     /**
-     * Handle an incoming request.
+     * Checks if user is subscriber
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

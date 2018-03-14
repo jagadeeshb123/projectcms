@@ -1,18 +1,24 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
-
-use App\Category;
-use App\Comment;
-use App\Photo;
+use App\Models\CMS\Photo;
 use Illuminate\Http\Request;
-use App\post;
+use App\Models\CMS\post;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Requests;
-
+/**
+ * Class PostsController
+ * create post, view all posts
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ *
+ * @package App\Http\Controllers
+ */
 class PostsController extends Controller
 {
+    /**
+     * Show all posts
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $post = post::all();
@@ -26,6 +32,12 @@ class PostsController extends Controller
         return view('posts.index', compact('post', 'timearray'));
     }
 
+    /**
+     * Show post based on post id
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         $post = post::findOrFail($id);
@@ -34,6 +46,12 @@ class PostsController extends Controller
         return view('posts.view', compact('post', 'comments'));
     }
 
+    /**
+     * Save post to database
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Request $request)
     {
         $this->validate(request(), [

@@ -36,8 +36,8 @@
 
                 <div class="form-group">
                     <select name="is_active" class="form-control" id="is_active">
-                        <option value="0">Not Active</option>
                         <option value="1">Active</option>
+                        <option value="2" selected>Not Active</option>
                     </select>
                 </div>
 

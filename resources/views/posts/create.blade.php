@@ -1,6 +1,5 @@
 @extends('admin.layouts.master')
 
-
 @section('content')
 
     <h2>Create Post:-</h2>
