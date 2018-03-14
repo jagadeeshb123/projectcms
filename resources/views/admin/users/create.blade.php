@@ -34,7 +34,7 @@
 
         <div class="form-group">
             <lable>Image:</lable>
-            <input type="file" id="photo_id" name="photo_id" class="form-control">
+            <input type="file" id="photo_id" name="photo_id" class="form-control" required>
         </div>
 
         <div class="form-group">

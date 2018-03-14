@@ -30,4 +30,20 @@ class post extends Model
 
         return $this->hasMany('App\Comment');
     }
+
+    //checking for updated feilds and sending in assoc array
+    public static function updateValidation($request, $photo){
+
+        $data = [];
+        if($request->title)
+            $data['title'] = $request->title;
+        if($request->body)
+            $data['body'] = $request->body;
+        if($request->category_id)
+            $data['category_id'] = $request->category_id;
+        if($photo != null)
+            $data['photo_id'] = $photo->id;
+
+        return $data;
+    }
 }

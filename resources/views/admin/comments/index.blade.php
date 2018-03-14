@@ -22,7 +22,7 @@
                     <td>{{$item->id}}</td>
                     <td>{{$item->author}}</td>
                     <td>{{$item->email}}</td>
-                    <td><a href="#">{{$item->body}}</a></td>
+                    <td>{{$item->body}}</td>
                     <td>{{$item->created_at->diffForHumans()}}</td>
                     <td>{{$item->updated_at->diffForHumans()}}</td>
                     <td>
@@ -30,14 +30,14 @@
                             <form action="/admin/comments/{{$item->id}}" method="post">
                                 {{@csrf_field()}}
                                 <input type="hidden" name="is_active" value="1">
-                                <button class="btn-success btn" type="submit" id="submit"><a href="">Approve</a></button>
+                                <button class="btn-success btn" type="submit" id="submit">Approve</button>
                             </form>
                         @endif
                         @if($item->is_active == 1)
                                 <form action="/admin/comments/{{$item->id}}" method="post">
                                     {{@csrf_field()}}
                                     <input type="hidden" name="is_active" value="0">
-                                    <button class="btn-info btn" type="submit" id="submit"><a href="">UnApprove</a></button>
+                                    <button class="btn-info btn" type="submit" id="submit">UnApprove</button>
                                 </form>
                             @endif
                     </td>

@@ -18,16 +18,16 @@
 
                 <div class="form-group">
                     <lable>Name:</lable>
-                    <input type="text" class="form-control" name="name" value="{{$user->name}}" required>
+                    <input type="text" class="form-control" name="name" value="{{$user->name}}">
                 </div>
 
                 <div class="form-group">
                     <lable>Email:</lable>
-                    <input type="text" class="form-control" name="email" value="{{$user->email}}" required>
+                    <input type="text" class="form-control" name="email" value="{{$user->email}}">
                 </div>
 
                 <div class="form-group">
-                    <select name="role_id" class="form-control" id="role_id" required>
+                    <select name="role_id" class="form-control" id="role_id">
                         <option value="1">Administrator</option>
                         <option value="2">Author</option>
                         <option value="3">Subscriber</option>
@@ -35,15 +35,20 @@
                 </div>
 
                 <div class="form-group">
-                    <select name="is_active" class="form-control" id="is_active" required>
+                    <select name="is_active" class="form-control" id="is_active">
                         <option value="0">Not Active</option>
                         <option value="1">Active</option>
                     </select>
                 </div>
 
                 <div class="form-group">
+                    <lable>Image:</lable>
+                    <input type="file" id="photo_id" name="photo_id" class="form-control">
+                </div>
+
+                <div class="form-group">
                     <lable>Password:</lable>
-                    <input type="password" class="form-control" name="password" required>
+                    <input type="password" class="form-control" name="password">
                 </div>
 
                 <div class="form-group">

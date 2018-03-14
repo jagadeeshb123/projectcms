@@ -26,15 +26,18 @@ class AdminUsersController extends Controller
 
     public function store(Request $request){
 
-        $input = $request->all();
-        if($file = $request->file('photo_id')){
-            $name = time(). $file->getClientOriginalName();
-            $file->move('images', $name);
-            $photo = Photo::create(['file'=>$name]);
-            $input['photo_id'] = $photo->id;
-        }
-        $input['password'] = bcrypt($request->password);
-        User::create($input);
+        $this->validate(request(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'role_id' => 'required',
+            'is_active' => 'required',
+            'password' => 'required'
+        ]);
+
+        $photo = Photo::addPhotoToPublic($request);
+        $password = bcrypt($request->password);
+        $data = User::updateValidation($request, $photo, $password);
+        User::create($data);
 
         Return redirect('/admin/users');
     }
@@ -46,16 +49,17 @@ class AdminUsersController extends Controller
         return view('admin.users.edit', compact('user'));
     }
 
-    public function update($user)
+    public function update(request $request, $user)
     {
-        $password = bcrypt(request('password'));
-        Auth::user()->where(['id'=>$user])->update([
-            'name'=> \request('name'),
-            'email'=> \request('email'),
-            'password'=> $password,
-            'role_id'=> \request('role_id'),
-            'is_active'=> \request('is_active'),
-        ]);
+        $photo = $password = null;
+        if($request->photo_id)
+            $photo = Photo::addPhotoToPublic($request);
+        if($request->password)
+            $password = bcrypt($request->password);
+        //checking for updated fields and passing to assoc array
+        $data = User::updateValidation($request, $photo, $password);
+
+        Auth::user()->where(['id'=>$user])->update($data);
 
         return redirect('/admin/users');
     }

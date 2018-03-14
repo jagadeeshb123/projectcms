@@ -59,5 +59,25 @@ class User extends Authenticatable
         return false;
     }
 
+    //checking for updated fields and passing to assoc array
+    public static function updateValidation($request, $photo, $password){
+
+        $data = [];
+        if($request->name)
+            $data['name'] = $request->name;
+        if($request->email)
+            $data['email'] = $request->email;
+        if($request->role_id)
+            $data['role_id'] = $request->role_id;
+        if($request->is_active)
+            $data['is_active'] = $request->is_active;
+        if($request->photo_id)
+            $data['photo_id'] = $photo->id;
+        if($request->password)
+            $data['password'] = $password;
+
+        return $data;
+    }
+
 
 }

@@ -37,20 +37,12 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, $post)
     {
-        $input = $request->all();
-        if($file = $request->file(['photo_id'])){
-            $name  = time(). $file->getClientOriginalName();
-            $file->move('images', $name);
-            $photo = Photo::create(['file'=>$name]);
-            $input['photo_id'] = $photo->id;
-        }
+        $photo = null;
+        if($request->photo_id)
+            $photo = Photo::addPhotoToPublic($request);
 
-        Post::where(['id'=>$post])->update([
-            'title'=> $request->title,
-            'body'=> $request->body,
-            'photo_id'=> $photo->id,
-            'category_id' => $request->category_id
-        ]);
+        $data = post::updateValidation($request, $photo);
+        Post::where(['id'=>$post])->update($data);
 
         return redirect('/admin/posts');
     }
