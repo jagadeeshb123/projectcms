@@ -11,16 +11,40 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/','PostsController@index');
+
+Route::get('/posts/{id}', 'PostsController@show');
+
+
+Route::group(['middleware'=>'subscriber'], function () {
+
+    Route::get('/home', 'HomeController@index');
+
+    Route::post('/comments/{id}', 'PostCommentController@store');
+
+});
+
+
+Route::group(['middleware'=>'author'], function () {
+
+    Route::get('/posts/create', 'PostsController@create');
+
+    Route::post('/posts', 'PostsController@store');
+});
 
 
 Route::group(['middleware'=>'admin'], function () {
+
+    Route::get('admin/posts', 'AdminPostsController@index');
+
+    Route::get('admin/posts/{id}', 'AdminPostsController@edit');
+
+    Route::post('/admin/posts/{post}/update', 'AdminPostsController@update');
+
+    Route::get('/admin/posts/{post}/delete', 'AdminPostsController@destroy');
+
 
     Route::get('admin/users', 'AdminUsersController@index');
 
@@ -35,17 +59,11 @@ Route::group(['middleware'=>'admin'], function () {
     Route::get('/admin/users/{user}/delete', 'AdminUsersController@destroy');
 
 
-    Route::get('admin/posts', 'AdminPostsController@index');
+    Route::get('/admin/comments', 'AdminCommentsController@index');
 
-    Route::get('admin/posts/create', 'AdminPostsController@create');
+    Route::post('/admin/comments/{id}', 'AdminCommentsController@edit');
 
-    Route::post('admin/posts', 'AdminPostsController@store');
-
-    Route::get('admin/posts/{id}', 'AdminPostsController@edit');
-
-    Route::post('/admin/posts/{post}/update', 'AdminPostsController@update');
-
-    Route::get('/admin/posts/{post}/delete', 'AdminPostsController@destroy');
+    Route::get('/admin/comments/{id}/delete', 'AdminCommentsController@destroy');
 
 
     Route::get('/admin/categories', 'AdminCategoriesController@index');
@@ -58,19 +76,4 @@ Route::group(['middleware'=>'admin'], function () {
 
     Route::get('/admin/categories/{category}/delete', 'AdminCategoriesController@destroy');
 
-
-    Route::get('/admin/comments', 'AdminCommentsController@index');
-
-    Route::post('/comments/{id}', 'PostCommentController@store');
-
-    Route::post('/admin/comments/{id}', 'AdminCommentsController@edit');
-
-    Route::get('/admin/comments/{id}/delete', 'AdminCommentsController@destroy');
 });
-
-Route::get('/posts', 'PostsController@index');
-
-Route::get('/posts/{id}', 'PostsController@show');
-
-
-

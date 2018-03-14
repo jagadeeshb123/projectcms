@@ -1,4 +1,4 @@
-@extends('posts.layouts.master')
+@extends('posts.layouts.masterView')
 
 @section('content')
     <div class="col-md-8 blog-main">
@@ -10,7 +10,7 @@
                 <img class="img-responsive" src="{{$post->photo->file}}" alt="No Photo for post">
             @endif
             <hr>
-            <p>{{$post->body}}</p>
+            <p class="text-justify">{{$post->body}}</p>
             <hr>
 
             @if(Auth::check())
@@ -50,10 +50,6 @@
                     @endforeach
                 </div>
             @endif
-
-
-
-
         </div>
     </div>
 

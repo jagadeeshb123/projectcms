@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Comment;
 use Illuminate\Http\Request;
 use App\post;
@@ -10,45 +11,19 @@ use App\Http\Requests;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $post = post::all();
-
-        return view('posts.index', compact('post'));
+        $timearray = [];
+        $i = 0;
+        foreach ($post as $item){
+            $timearray[$i] = $item->created_at->diffForHumans();
+            $i = $i +1;
+        }
+        sort($timearray);
+        return view('posts.index', compact('post', 'timearray'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $post = post::findOrFail($id);
@@ -57,37 +32,25 @@ class PostsController extends Controller
         return view('posts.view', compact('post', 'comments'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function create()
     {
-        //
+        $categories = Category::get()->all();
+        return $categories;
+        //return view('posts.create', compact('categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function store(Request $request)
     {
-        //
-    }
+        $input = $request->all();
+        $user = Auth::user();
+        if($file = $request->file('photo_id')){
+            $name = time(). $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+        }
+        $user->posts()->create($input);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect('/admin/posts');
     }
 }

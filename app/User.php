@@ -36,6 +36,11 @@ class User extends Authenticatable
         return $this->belongsTo('App\Photo');
     }
 
+
+    public function posts(){
+        return $this->hasMany('App\Post');
+    }
+
     public function isAdmin(){
 
         if($this->role->name == "Administrator" && $this->is_active == 1){
@@ -44,7 +49,25 @@ class User extends Authenticatable
         return false;
     }
 
-    public function posts(){
-        return $this->hasMany('App\Post');
+    public function isAuthor(){
+
+        if($this->role->name == "Author" ||$this->role->name == "Administrator"){
+            if($this->is_active == 1){
+                return true;
+            }
+        }
+        return false;
     }
+
+    public function isSubscriber(){
+
+        if($this->role->name == "Subscriber" || $this->role->name == "Author" || $this->role->name == "Administrator"){
+            if($this->is_active == 1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

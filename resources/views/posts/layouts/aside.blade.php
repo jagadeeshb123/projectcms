@@ -1,20 +1,27 @@
 <aside class="col-md-4 blog-sidebar">
 
     <div class="p-3">
-        <h4 class="font-italic">Archives</h4>
-        <ol class="list-unstyled mb-0">
-            <li><a href="#">March 2014</a></li>
-            <li><a href="#">February 2014</a></li>
-            <li><a href="#">January 2014</a></li>
-            <li><a href="#">December 2013</a></li>
-            <li><a href="#">November 2013</a></li>
-            <li><a href="#">October 2013</a></li>
-            <li><a href="#">September 2013</a></li>
-            <li><a href="#">August 2013</a></li>
-            <li><a href="#">July 2013</a></li>
-            <li><a href="#">June 2013</a></li>
-            <li><a href="#">May 2013</a></li>
-            <li><a href="#">April 2013</a></li>
+        <h4 class="font-italic">Categories of Posts</h4>
+        <ol class=" mb-0">
+
+            @if($post)
+                @foreach($post as $item)
+                    <li>{{$item->category->name}}</li>
+                @endforeach
+            @endif
+
         </ol>
+    </div>
+
+    <div class="p-3">
+        <h4 class="font-italic">Post Timeline</h4>
+        <ul class="">
+            @if($post)
+                @for($i = 0; $i < sizeof($timearray); $i++)
+                    <li>{{$timearray[$i]}}</li>
+                @endfor
+            @endif
+
+        </ul>
     </div>
 </aside><!-- /.blog-sidebar -->

@@ -4,7 +4,7 @@
 @section('content')
 
     <h2>Create Post:-</h2>
-    <form action="/posts" method="post" enctype="multipart/form-data">
+    <form action="/admin/posts" method="post" enctype="multipart/form-data">
 
         {{@csrf_field()}}
 
