@@ -3,6 +3,12 @@
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class Kernel
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Console
+ */
 class Kernel extends ConsoleKernel
 {
     /**

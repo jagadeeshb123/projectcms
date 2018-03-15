@@ -1,14 +1,16 @@
 <?php namespace App\Models\CMS;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Photo
- * Photo model
- * @author Jagadeesh Battula jagadeesh@goftx.com
  *
+ * Photo model
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
  * @package App
  */
+
+use Illuminate\Database\Eloquent\Model;
+
 class Photo extends Model
 {
     /**
@@ -31,7 +33,6 @@ class Photo extends Model
      */
     public function getFileAttribute($photo)
     {
-
         return $this->uploads . $photo;
     }
 
@@ -44,14 +45,17 @@ class Photo extends Model
     public static function addPhotoToPublic($request)
     {
         $input = $request->all();
+
         if($file = $request->file(['photo_id']))
         {
-            $name  = time(). $file->getClientOriginalName();
+            $name               = time(). $file->getClientOriginalName();
             $file->move('images', $name);
-            $photo = Photo::create(['file'=>$name]);
-            $input['photo_id'] = $photo->id;
+            $photo              = Photo::create(['file'=>$name]);
+            $input['photo_id']  = $photo->id;
+
+            return $photo;
         }
 
-        return $photo;
+        return null;
     }
 }

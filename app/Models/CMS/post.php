@@ -1,14 +1,16 @@
 <?php namespace App\Models\CMS;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class post
- * post model
- * @author jagadeesh battula jagadeesh@goftx.com
  *
+ * Post model
+ *
+ * @author jagadeesh battula jagadeesh@goftx.com
  * @package App
  */
+
+use Illuminate\Database\Eloquent\Model;
+
 class post extends Model
 {
     /**
@@ -65,35 +67,5 @@ class post extends Model
     {
 
         return $this->hasMany('App\Models\CMS\Comment');
-    }
-
-    /**
-     * Checking for updated fields and sending in assoc array
-     *
-     * @param $request
-     * @param $photo
-     * @return array
-     */
-    public static function updateValidation($request, $photo)
-    {
-        $data = [];
-        if($request->title)
-        {
-            $data['title'] = $request->title;
-        }
-        if($request->body)
-        {
-            $data['body'] = $request->body;
-        }
-        if($request->category_id)
-        {
-            $data['category_id'] = $request->category_id;
-        }
-        if($photo != null)
-        {
-            $data['photo_id'] = $photo->id;
-        }
-
-        return $data;
     }
 }

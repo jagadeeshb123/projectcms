@@ -1,6 +1,11 @@
-<?php
+<?php namespace App\Http\Controllers;
 
-namespace App\Http\Controllers;
+/**
+ * Class Controller
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers
+ */
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

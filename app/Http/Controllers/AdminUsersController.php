@@ -1,17 +1,19 @@
 <?php namespace App\Http\Controllers;
 
+/**
+ * Class AdminUsersController
+ *
+ * Admin can add remove update user information
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers
+ */
+
 use App\Models\CMS\Photo;
 use App\Models\User\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class AdminUsersController
- * admin can add remove update user information
- * @author Jagadeesh Battula jagadeesh@goftx.com
- *
- * @package App\Http\Controllers
- */
 class AdminUsersController extends Controller
 {
     /**
@@ -21,7 +23,6 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-
         $users = User::all();
 
         return view('admin.users.index', compact('users'));
@@ -54,13 +55,16 @@ class AdminUsersController extends Controller
             'password'  => 'required',
             'photo_id'  => 'required'
         ]);
+
         if($request->file(['photo_id']))
         {
-            $photo = Photo::addPhotoToPublic($request);
-            $input['photo_id'] = $photo->id;
+            $photo              = Photo::addPhotoToPublic($request);
+            $input['photo_id']  = $photo->id;
         }
-        $input['password'] = bcrypt($request->get('password'));
-        $user = User::create($input);
+
+        $input['password']  = bcrypt($request->get('password'));
+        $user               = User::create($input);
+
         if(!isset($user->id))
         {
             return redirect()->back()->withInput()->withErrors('Could not save successfully');
@@ -99,18 +103,23 @@ class AdminUsersController extends Controller
             'is_active',
             'password'
         ];
+
         foreach ($feildsToValues as $feild)
         {
+
             if($request->get($feild))
             {
                 $data[$feild] = $request->get($feild);
             }
+
         }
+
         if($request->file(['photo_id']))
         {
-            $photo = Photo::addPhotoToPublic($request);
-            $data['photo_id'] = $photo->id;
+            $photo              = Photo::addPhotoToPublic($request);
+            $data['photo_id']   = $photo->id;
         }
+
         Auth::user()->where(['id'=>$user])->update($data);
 
         return redirect('/admin/users');

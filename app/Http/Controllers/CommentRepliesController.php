@@ -1,12 +1,16 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 /**
  * Class CommentRepliesController
+ *
  * replies to comments
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
  * @package App\Http\Controllers
  */
+
+use Illuminate\Http\Request;
+
 class CommentRepliesController extends Controller
 {
     /**

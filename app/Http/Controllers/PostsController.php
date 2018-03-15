@@ -1,17 +1,19 @@
 <?php namespace App\Http\Controllers;
 
+/**
+ * Class PostsController
+ *
+ * Create post, view all posts
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers
+ */
+
 use App\Models\CMS\Photo;
 use Illuminate\Http\Request;
 use App\Models\CMS\post;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class PostsController
- * create post, view all posts
- * @author Jagadeesh Battula jagadeesh@goftx.com
- *
- * @package App\Http\Controllers
- */
 class PostsController extends Controller
 {
     /**
@@ -21,14 +23,18 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $post = post::all();
-        $timearray = [];
-        $i = 0;
-        foreach ($post as $item){
-            $timearray[$i] = $item->created_at->diffForHumans();
-            $i = $i +1;
+        $post       = post::all();
+        $timearray  = [];
+        $i          = 0;
+
+        foreach ($post as $item)
+        {
+            $timearray[$i]  = $item->created_at->diffForHumans();
+            $i              = $i +1;
         }
+
         sort($timearray);
+
         return view('posts.index', compact('post', 'timearray'));
     }
 
@@ -40,8 +46,8 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = post::findOrFail($id);
-        $comments = $post->comments;
+        $post       = post::findOrFail($id);
+        $comments   = $post->comments;
 
         return view('posts.view', compact('post', 'comments'));
     }
@@ -55,15 +61,15 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'title' => 'required',
-            'category_id' => 'required',
-            'photo_id' => 'required',
-            'body' => 'required'
+            'title'         => 'required',
+            'category_id'   => 'required',
+            'photo_id'      => 'required',
+            'body'          => 'required'
         ]);
-        $input = $request->all();
-        $user = Auth::user();
-        $photo = Photo::addPhotoToPublic($request);
-        $input['photo_id'] = $photo->id;
+        $input              = $request->all();
+        $user               = Auth::user();
+        $photo              = Photo::addPhotoToPublic($request);
+        $input['photo_id']  = $photo->id;
         $user->posts()->create($input);
 
         return redirect('/admin/posts');

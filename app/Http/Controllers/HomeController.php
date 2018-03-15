@@ -2,9 +2,11 @@
 
 /**
  * Class HomeController
+ *
  * @author Jagadeesh Battula jagadeesh@goftx.com
  * @package App\Http\Controllers
  */
+
 class HomeController extends Controller
 {
     /**
@@ -16,6 +18,8 @@ class HomeController extends Controller
     }
 
     /**
+     * Index method
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()

@@ -1,14 +1,16 @@
 <?php namespace App\Models\User;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-
 /**
  * Class User
- * User model
- * @author Jagadeesh Battula jagadeesh@goftx.com
  *
+ * User model
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
  * @package App
  */
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class User extends Authenticatable
 {
     /**
@@ -51,7 +53,6 @@ class User extends Authenticatable
      */
     public function photo()
     {
-
         return $this->belongsTo('App\Models\CMS\Photo');
     }
 

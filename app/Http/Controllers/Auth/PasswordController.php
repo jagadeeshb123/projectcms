@@ -1,6 +1,11 @@
-<?php
+<?php namespace App\Http\Controllers\Auth;
 
-namespace App\Http\Controllers\Auth;
+/**
+ * Class PasswordController
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers\Auth
+ */
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;

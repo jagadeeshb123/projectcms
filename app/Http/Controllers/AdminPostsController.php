@@ -1,17 +1,19 @@
 <?php namespace App\Http\Controllers;
 
+/**
+ * Class AdminPostsController
+ *
+ * Admin can edit update delete posts
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers
+ */
+
 use App\Models\CMS\Category;
 use App\Models\CMS\Photo;
 use App\Models\CMS\post;
 use Illuminate\Http\Request;
 
-/**
- * Class AdminPostsController
- * admin can edit update delete posts
- * @author Jagadeesh Battula jagadeesh@goftx.com
- *
- * @package App\Http\Controllers
- */
 class AdminPostsController extends Controller
 {
     /**
@@ -46,7 +48,7 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $post       = Post::findOrFail($id);
         $categories = Category::get()->all();
 
         return view('admin.posts.edit', compact('post', 'categories'));
@@ -61,11 +63,29 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $post)
     {
-        $photo = null;
-        if($request->photo_id)
-            $photo = Photo::addPhotoToPublic($request);
+        $data = [];
+        $feildsToValues = [
+            'title',
+            'body',
+            'category_id'
+        ];
 
-        $data = post::updateValidation($request, $photo);
+        foreach ($feildsToValues as $feild)
+        {
+
+            if($request->get($feild))
+            {
+                $data[$feild] = $request->get($feild);
+            }
+
+        }
+
+        if($request->get('photo_id'))
+        {
+            $photo = Photo::addPhotoToPublic($request);
+            $data['photo_id']   = $photo->id;
+        }
+
         Post::where(['id'=>$post])->update($data);
 
         return redirect('/admin/posts');
@@ -80,7 +100,12 @@ class AdminPostsController extends Controller
     public function destroy($user)
     {
         $post = Post::findOrFail($user);
-        unlink(public_path(). $post->photo->file);
+
+        if($post->photo->file)
+        {
+            unlink(public_path(). $post->photo->file);
+        }
+
         $post->delete();
 
         return redirect('/admin/posts');

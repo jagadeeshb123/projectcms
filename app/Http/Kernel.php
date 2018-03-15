@@ -1,6 +1,11 @@
-<?php
+<?php namespace App\Http;
 
-namespace App\Http;
+/**
+ * Class Kernel
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http
+ */
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 

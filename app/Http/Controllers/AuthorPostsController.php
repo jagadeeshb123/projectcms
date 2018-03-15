@@ -1,16 +1,18 @@
 <?php namespace App\Http\Controllers;
 
+/**
+ * Class AuthorPostsController
+ *
+ * Author can create new post and view his posts
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers
+ */
+
 use App\Models\CMS\post;
 use App\Models\CMS\Category;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class AuthorPostsController
- * author can create new post and view his posts
- * @author Jagadeesh Battula jagadeesh@goftx.com
- *
- * @package App\Http\Controllers
- */
 class AuthorPostsController extends Controller
 {
     /**
@@ -20,8 +22,8 @@ class AuthorPostsController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->id;
-        $posts = post::where('user_id', $user)->get();
+        $user   = Auth::user()->id;
+        $posts  = post::where('user_id', $user)->get();
 
         return view('author.posts.index', compact('posts'));
     }

@@ -1,14 +1,16 @@
 <?php namespace App\Models\User;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Role
- * Role model
- * @author Jagadeesh Battula jagadeesh@goftx.com
  *
+ * Role model
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
  * @package App
  */
+
+use Illuminate\Database\Eloquent\Model;
+
 class Role extends Model
 {
     /**

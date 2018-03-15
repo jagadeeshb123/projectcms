@@ -1,15 +1,17 @@
 <?php namespace App\Http\Middleware;
 
+/**
+ * Class Subscriber
+ *
+ * Checks if logged in user is subscriber
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Middleware
+ */
+
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class Subscriber
- * Checks if logged in user is subscriber
- * @author Jagadeesh Battula jagadeesh@goftx.com
- *
- * @package App\Http\Middleware
- */
 class Subscriber
 {
     /**
@@ -21,8 +23,10 @@ class Subscriber
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check()){
-            if(Auth::user()->isSubscriber()){
+        if(Auth::check())
+        {
+            if(Auth::user()->isSubscriber())
+            {
                 return $next($request);
             }
 

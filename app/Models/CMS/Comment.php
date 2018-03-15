@@ -1,14 +1,16 @@
 <?php namespace App\Models\CMS;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Comment
- * Comment model
- * @author Jagadeesh Battula jagadeesh@gmail.com
  *
+ *Comment model
+ *
+ * @author Jagadeesh Battula jagadeesh@gmail.com
  * @package App
  */
+
+use Illuminate\Database\Eloquent\Model;
+
 class Comment extends Model
 {
     /**

@@ -1,15 +1,17 @@
 <?php namespace App\Http\Controllers;
 
+/**
+ * Class AdminCategoriesController
+ *
+ * Admin can add update delete categories
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers
+ */
+
 use App\Models\CMS\Category;
 use Illuminate\Http\Request;
 
-/**
- * Class AdminCategoriesController
- * Admin can add update delete categories
- * @author Jagadeesh Battula jagadeesh@goftx.com
- *
- * @package App\Http\Controllers
- */
 class AdminCategoriesController extends Controller
 {
     /**

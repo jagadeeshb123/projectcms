@@ -1,16 +1,18 @@
 <?php namespace App\Http\Controllers;
 
+/**
+ * Class PostCommentController
+ *
+ * Comments can be posted to a post here
+ *
+ *@author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Controllers
+ */
+
 use App\Models\CMS\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-/**
- * Class PostCommentController
- * comments can be posted to a post here
- *@author Jagadeesh Battula jagadeesh@goftx.com
- *
- * @package App\Http\Controllers
- */
 class PostCommentController extends Controller
 {
     /**
@@ -22,7 +24,6 @@ class PostCommentController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
-
         $data = [
             'post_id'   => $request->get('post_id'),
             'author'    => $user->name,

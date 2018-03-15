@@ -1,14 +1,16 @@
 <?php namespace App\Http\Controllers;
 
-use App\Models\CMS\Comment;
-
 /**
  * Class AdminCommentsController
- * admin can edit delete disapprove comments
- * @author Jagadeesh Battula jagadeesh@goftx.com
  *
+ * Admin can edit delete disapprove comments
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
  * @package App\Http\Controllers
  */
+
+use App\Models\CMS\Comment;
+
 class AdminCommentsController extends Controller
 {
     /**

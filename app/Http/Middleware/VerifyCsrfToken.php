@@ -1,6 +1,11 @@
-<?php
+<?php namespace App\Http\Middleware;
 
-namespace App\Http\Middleware;
+/**
+ * Class VerifyCsrfToken
+ *
+ * @author Jagadeesh Battula jagadeesh@goftx.com
+ * @package App\Http\Middleware
+ */
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

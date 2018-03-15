@@ -1,14 +1,16 @@
 <?php namespace App\Models\CMS;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Category
- * Category model
- * @author Jagadeesh Battula jagadeesh@gmail.com
  *
+ * Category model
+ *
+ * @author Jagadeesh Battula jagadeesh@gmail.com
  * @package App
  */
+
+use Illuminate\Database\Eloquent\Model;
+
 class Category extends Model
 {
     /**
